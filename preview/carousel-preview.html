@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Word — Carousel Preview v0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ----- Palette ----- */
+    --bg:          #F2ECE2;   /* warm cream */
+    --ink:         #2B2622;   /* dark warm charcoal */
+    --ink-muted:   #5A5149;
+    --ink-faint:   #938878;
+
+    /* ----- Canvas ----- */
+    --slide-w:     1080px;
+    --slide-h:     1350px;
+    --safe-x:      110px;
+    --safe-y:      140px;
+
+    /* ----- Typography ----- */
+    --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif:  'EB Garamond', 'Iowan Old Style', Georgia, serif;
+
+    --size-hero:       92px;
+    --size-hero-scr:   104px;
+    --size-body:       42px;
+    --size-pullquote:  62px;
+    --size-scripture:  46px;
+    --size-ref:        30px;
+    --size-signature:  22px;
+    --size-site:       19px;
+
+    --lh-hero:       1.06;
+    --lh-body:       1.38;
+    --lh-pullquote:  1.18;
+    --lh-scripture:  1.42;
+
+    --tr-hero:       -0.022em;
+    --tr-signature:  0.22em;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 56px 40px 120px;
+    background: #2A2724;
+    font-family: var(--font-sans);
+    color: #ddd;
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    margin: 0 auto 8px;
+    max-width: var(--slide-w);
+    color: #F2ECE2;
+  }
+  .subtitle {
+    margin: 0 auto 60px;
+    max-width: var(--slide-w);
+    color: #888;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
+
+  .post-divider {
+    max-width: var(--slide-w);
+    margin: 80px auto 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+  }
+  .post-divider .title {
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: #F2ECE2;
+  }
+
+  .slide {
+    width: var(--slide-w);
+    height: var(--slide-h);
+    background: var(--bg);
+    color: var(--ink);
+    position: relative;
+    margin: 0 auto 14px;
+    padding: var(--safe-y) var(--safe-x);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    /* subtle grain — optional, helps avoid flatness */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0) 60%);
+    pointer-events: none;
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    color: var(--ink-faint);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    font-weight: 400;
+  }
+
+  /* ----- Text roles ----- */
+  .hero {
+    font-size: var(--size-hero);
+    line-height: var(--lh-hero);
+    font-weight: 500;
+    letter-spacing: var(--tr-hero);
+    margin: auto 0;
+    text-wrap: balance;
+  }
+  .body {
+    font-size: var(--size-body);
+    line-height: var(--lh-body);
+    font-weight: 400;
+    margin: auto 0;
+    letter-spacing: -0.005em;
+    text-wrap: pretty;
+  }
+  .pullquote {
+    font-size: var(--size-pullquote);
+    line-height: var(--lh-pullquote);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: auto 0;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .scripture {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--size-scripture);
+    line-height: var(--lh-scripture);
+    font-weight: 400;
+    margin: auto 0;
+    letter-spacing: -0.002em;
+  }
+  .scripture-hero {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--size-hero-scr);
+    line-height: var(--lh-hero);
+    font-weight: 500;
+    margin: auto 0;
+    text-align: center;
+  }
+  .scripture-ref {
+    font-family: var(--font-serif);
+    font-style: normal;
+    font-size: var(--size-ref);
+    font-weight: 400;
+    margin-top: 28px;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ----- Signature ----- */
+  .signature {
+    margin: auto 0;
+    text-align: center;
+  }
+  .signature .mark {
+    font-size: var(--size-signature);
+    font-weight: 500;
+    letter-spacing: var(--tr-signature);
+    text-transform: uppercase;
+  }
+  .signature .site {
+    display: block;
+    margin-top: 14px;
+    font-size: var(--size-site);
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+  }
+
+  /* ----- Captions for slide variants in dev view ----- */
+  .variant-tag {
+    position: absolute;
+    top: 28px;
+    left: 32px;
+    color: var(--ink-faint);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<h1>The Word — Carousel Preview v0.1</h1>
+<p class="subtitle">3 example posts · 1080×1350 · Inter + EB Garamond · cream #F2ECE2</p>
+
+<!-- ========================================================= -->
+<!-- POST A — Unfolding thesis                                  -->
+<!-- ========================================================= -->
+<div class="post-divider">
+  <span class="title">Post A · Unfolding thesis</span>
+  <span>Seriousness</span>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Hero</span>
+  <span class="slide-num">1 / 8</span>
+  <div class="hero">Seriousness is back in fashion.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">2 / 8</span>
+  <div class="body">Not the kind that frowns.<br>The kind that carries weight.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">3 / 8</span>
+  <div class="body">A room where someone has stopped performing.<br>You can feel it before anyone speaks.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">4 / 8</span>
+  <div class="body">Most of us were taught the opposite - keep it light, stay agile, don't land.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">5 / 8</span>
+  <div class="body">But something is landing anyway.<br>People are tired of levity.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Pull-quote</span>
+  <span class="slide-num">6 / 8</span>
+  <div class="pullquote">Seriousness is the form attention takes when it stops flinching.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Landing</span>
+  <span class="slide-num">7 / 8</span>
+  <div class="hero">Not heavy.<br>Just true.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Signature</span>
+  <span class="slide-num">8 / 8</span>
+  <div class="signature">
+    <span class="mark">The Word</span>
+    <span class="site">thwrd.com</span>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- POST B — Scripture slow-walk                               -->
+<!-- ========================================================= -->
+<div class="post-divider">
+  <span class="title">Post B · Scripture slow-walk</span>
+  <span>Psalm 46:10</span>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Scripture hero</span>
+  <span class="slide-num">1 / 9</span>
+  <div class="scripture-hero">Be still.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">2 / 9</span>
+  <div class="body">Most translations soften it.<br>The Hebrew is closer to: cease striving.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">3 / 9</span>
+  <div class="body">Stop trying to hold the world in place.<br>Let go of the controls.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Scripture hero</span>
+  <span class="slide-num">4 / 9</span>
+  <div class="scripture-hero">And know.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">5 / 9</span>
+  <div class="body">Knowing comes after.<br>After you stop moving.<br>Not before.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Scripture hero</span>
+  <span class="slide-num">6 / 9</span>
+  <div class="scripture-hero">That I am God.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">7 / 9</span>
+  <div class="body">Not: <em>you</em> are.<br>Not: you should be.<br>Not: you almost are.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Scripture + ref</span>
+  <span class="slide-num">8 / 9</span>
+  <div class="scripture">
+    &ldquo;Be still, and know that I am God.&rdquo;
+    <div class="scripture-ref">- Psalm 46:10</div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Signature</span>
+  <span class="slide-num">9 / 9</span>
+  <div class="signature">
+    <span class="mark">The Word</span>
+    <span class="site">thwrd.com</span>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- POST C — Cultural reading                                  -->
+<!-- ========================================================= -->
+<div class="post-divider">
+  <span class="title">Post C · Cultural reading</span>
+  <span>Presence</span>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Hero</span>
+  <span class="slide-num">1 / 8</span>
+  <div class="hero">You can feel when someone is really there.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">2 / 8</span>
+  <div class="body">The rest of the room has the blue cast of a screen - even when no screen is visible.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">3 / 8</span>
+  <div class="body">The body is in the chair.<br>The attention is three weeks ahead, or four feeds deep.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">4 / 8</span>
+  <div class="body">We called it <em>restlessness</em> when it meant pacing.<br><br>What do we call it when it has been the resting state for a decade?</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Pull-quote</span>
+  <span class="slide-num">5 / 8</span>
+  <div class="pullquote">Presence has become a minority position.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Body</span>
+  <span class="slide-num">6 / 8</span>
+  <div class="body">The old books called it one of the marks of a soul turned toward God:<br>actually being where you are.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Landing</span>
+  <span class="slide-num">7 / 8</span>
+  <div class="body">Everyone can feel the difference.<br>Almost no one can afford it.</div>
+</div>
+
+<div class="slide">
+  <span class="variant-tag">Signature</span>
+  <span class="slide-num">8 / 8</span>
+  <div class="signature">
+    <span class="mark">The Word</span>
+    <span class="site">thwrd.com</span>
+  </div>
+</div>
+
+</body>
+</html>
