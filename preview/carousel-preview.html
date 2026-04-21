@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The Word — Carousel Preview v0.2 (Poppins + site palette)</title>
+<title>The Word — Carousel Preview v0.3 (Poppins + Playfair scripture)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
   :root {
     /* ----- Palette (lifted from thwrd.com) ----- */
@@ -20,8 +20,9 @@
     --safe-x:      110px;
     --safe-y:      140px;
 
-    /* ----- Typography — Poppins only ----- */
-    --font:        'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* ----- Typography ----- */
+    --font:         'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-script:  'Playfair Display', Georgia, serif;  /* scripture - matches shirt print */
 
     --size-hero:        96px;
     --size-hero-scr:    108px;
@@ -137,23 +138,26 @@
     text-wrap: balance;
   }
   .scripture {
+    font-family: var(--font-script);
     font-style: italic;
     font-size: var(--size-scripture);
     line-height: var(--lh-scripture);
-    font-weight: 400;
+    font-weight: 500;
     margin: auto 0;
     letter-spacing: -0.005em;
   }
   .scripture-hero {
+    font-family: var(--font-script);
     font-style: italic;
     font-size: var(--size-hero-scr);
     line-height: var(--lh-hero);
     font-weight: 500;
     margin: auto 0;
     text-align: center;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.005em;
   }
   .scripture-ref {
+    font-family: var(--font);
     font-style: normal;
     font-size: var(--size-ref);
     font-weight: 400;
@@ -197,8 +201,8 @@
 </head>
 <body>
 
-<h1>The Word — Carousel Preview v0.2</h1>
-<p class="subtitle">Poppins only · palette lifted from thwrd.com · #DBDAD2 bg · #131313 ink</p>
+<h1>The Word — Carousel Preview v0.3</h1>
+<p class="subtitle">Poppins body · Playfair Display italic for scripture (matches shirt print) · palette lifted from thwrd.com</p>
 
 <!-- ========================================================= -->
 <!-- POST A — Unfolding thesis                                  -->
