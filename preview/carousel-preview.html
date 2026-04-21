@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The Word — Carousel Preview v0.1</title>
+<title>The Word — Carousel Preview v0.2 (Poppins + site palette)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* ----- Palette ----- */
-    --bg:          #F2ECE2;   /* warm cream */
-    --ink:         #2B2622;   /* dark warm charcoal */
-    --ink-muted:   #5A5149;
-    --ink-faint:   #938878;
+    /* ----- Palette (lifted from thwrd.com) ----- */
+    --bg:          #DBDAD2;   /* off-white from site */
+    --ink:         #131313;   /* near-black from site */
+    --ink-muted:   #4A4A48;
+    --ink-faint:   #8A8883;
 
     /* ----- Canvas ----- */
     --slide-w:     1080px;
@@ -20,25 +20,24 @@
     --safe-x:      110px;
     --safe-y:      140px;
 
-    /* ----- Typography ----- */
-    --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-serif:  'EB Garamond', 'Iowan Old Style', Georgia, serif;
+    /* ----- Typography — Poppins only ----- */
+    --font:        'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    --size-hero:       92px;
-    --size-hero-scr:   104px;
-    --size-body:       42px;
-    --size-pullquote:  62px;
-    --size-scripture:  46px;
-    --size-ref:        30px;
-    --size-signature:  22px;
-    --size-site:       19px;
+    --size-hero:        96px;
+    --size-hero-scr:    108px;
+    --size-body:        48px;
+    --size-pullquote:   66px;
+    --size-scripture:   52px;
+    --size-ref:         32px;
+    --size-signature:   22px;
+    --size-site:        19px;
 
-    --lh-hero:       1.06;
-    --lh-body:       1.38;
-    --lh-pullquote:  1.18;
+    --lh-hero:       1.08;
+    --lh-body:       1.36;
+    --lh-pullquote:  1.2;
     --lh-scripture:  1.42;
 
-    --tr-hero:       -0.022em;
+    --tr-hero:       -0.02em;
     --tr-signature:  0.22em;
   }
 
@@ -47,18 +46,18 @@
   body {
     margin: 0;
     padding: 56px 40px 120px;
-    background: #2A2724;
-    font-family: var(--font-sans);
+    background: #1D1E20;
+    font-family: var(--font);
     color: #ddd;
   }
 
   h1 {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 28px;
     letter-spacing: 0.02em;
     margin: 0 auto 8px;
     max-width: var(--slide-w);
-    color: #F2ECE2;
+    color: #DBDAD2;
   }
   .subtitle {
     margin: 0 auto 60px;
@@ -72,7 +71,7 @@
     max-width: var(--slide-w);
     margin: 80px auto 24px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #3A3A3A;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -84,7 +83,8 @@
   .post-divider .title {
     font-size: 16px;
     letter-spacing: 0.08em;
-    color: #F2ECE2;
+    color: #DBDAD2;
+    font-weight: 500;
   }
 
   .slide {
@@ -100,15 +100,6 @@
     overflow: hidden;
   }
 
-  .slide::before {
-    /* subtle grain — optional, helps avoid flatness */
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at top, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0) 60%);
-    pointer-events: none;
-  }
-
   .slide-num {
     position: absolute;
     top: 28px;
@@ -119,11 +110,11 @@
     font-weight: 400;
   }
 
-  /* ----- Text roles ----- */
+  /* ----- Text roles (all Poppins) ----- */
   .hero {
     font-size: var(--size-hero);
     line-height: var(--lh-hero);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: var(--tr-hero);
     margin: auto 0;
     text-wrap: balance;
@@ -146,25 +137,23 @@
     text-wrap: balance;
   }
   .scripture {
-    font-family: var(--font-serif);
     font-style: italic;
     font-size: var(--size-scripture);
     line-height: var(--lh-scripture);
     font-weight: 400;
     margin: auto 0;
-    letter-spacing: -0.002em;
+    letter-spacing: -0.005em;
   }
   .scripture-hero {
-    font-family: var(--font-serif);
     font-style: italic;
     font-size: var(--size-hero-scr);
     line-height: var(--lh-hero);
     font-weight: 500;
     margin: auto 0;
     text-align: center;
+    letter-spacing: -0.01em;
   }
   .scripture-ref {
-    font-family: var(--font-serif);
     font-style: normal;
     font-size: var(--size-ref);
     font-weight: 400;
@@ -180,7 +169,7 @@
   }
   .signature .mark {
     font-size: var(--size-signature);
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: var(--tr-signature);
     text-transform: uppercase;
   }
@@ -190,9 +179,10 @@
     font-size: var(--size-site);
     letter-spacing: 0.14em;
     color: var(--ink-muted);
+    font-weight: 400;
   }
 
-  /* ----- Captions for slide variants in dev view ----- */
+  /* ----- Dev view tags ----- */
   .variant-tag {
     position: absolute;
     top: 28px;
@@ -207,8 +197,8 @@
 </head>
 <body>
 
-<h1>The Word — Carousel Preview v0.1</h1>
-<p class="subtitle">3 example posts · 1080×1350 · Inter + EB Garamond · cream #F2ECE2</p>
+<h1>The Word — Carousel Preview v0.2</h1>
+<p class="subtitle">Poppins only · palette lifted from thwrd.com · #DBDAD2 bg · #131313 ink</p>
 
 <!-- ========================================================= -->
 <!-- POST A — Unfolding thesis                                  -->
